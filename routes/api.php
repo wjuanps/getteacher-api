@@ -15,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::get('routes', function () {
+  return response()->json(Route::getRoutes()->getRoutes());
+});
+
+Route::group(['prefix' => 'v1', 'namespace' => 'API\V1'], function () {
+  Route::apiResource('teachers', 'Teacher\TeacherController');
+  Route::apiResource('teachers.posts', 'Teacher\TeacherPostController')->shallow();
 });

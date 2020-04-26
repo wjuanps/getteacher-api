@@ -3,110 +3,113 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use YourAppRocks\EloquentUuid\Traits\HasUuid;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 
+ *
  * @author Juan Soares
  */
 class Post extends Model {
-    
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'teacher_id', 'title', 'slug', 'body', 'image', 'field', 'category', 'status'
-    ];
 
-    /**
-     * 
-     * @var \App\Models\Post $post
-     */
-    private $post;
+  use HasUuid;
 
-    /**
-     * Create a new model instance.
-     *
-     * @* @param Post $post
-     * 
-     * @return void
-     */
-    // public function __construct(Post $post) {
-    //     $this->post = $post;
-    // }
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'teacher_id', 'title', 'slug', 'body', 'image', 'field', 'category', 'status'
+  ];
 
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName() {
-        return 'slug';
-    }
+  /**
+   *
+   * @var \App\Models\Post $post
+   */
+  private $post;
 
-    /**
-     * 
-     */
-    public function getCountCategories() {
-        $categories = $this->select(
-                        DB::raw('count(*) AS count, category')
-                    )
-        ->groupBy('category')
-        ->limit(4)
-        ->get();
+  /**
+   * Create a new model instance.
+   *
+   * @* @param Post $post
+   *
+   * @return void
+   */
+  // public function __construct(Post $post) {
+  //     $this->post = $post;
+  // }
 
-        return $categories;
-    }
+  /**
+   * Get the route key for the model.
+   *
+   * @return string
+   */
+  public function getRouteKeyName() {
+    return 'slug';
+  }
 
-    /**
-     * 
-     */
-    public function getCountTags() {
-        $tags = PostTag::select(
-                        DB::raw('count(*) AS count, tag')
-                    )
-        ->orderBy('count', 'DESC')
-        ->groupBy('tag')
-        ->get();
+  /**
+   *
+   */
+  public function getCountCategories() {
+    $categories = $this->select(
+      DB::raw('count(*) AS count, category')
+    )
+    ->groupBy('category')
+    ->limit(4)
+    ->get();
 
-        return $tags;
-    }
+    return $categories;
+  }
 
-    /**
-     *
-     */
-    public function comments() {
-        return $this->hasMany(PostComment::class);
-    }
+  /**
+   *
+   */
+  public function getCountTags() {
+    $tags = PostTag::select(
+      DB::raw('count(*) AS count, tag')
+    )
+    ->orderBy('count', 'DESC')
+    ->groupBy('tag')
+    ->get();
 
-    /**
-     *
-     */
-    public function likes() {
-        return $this->hasMany(PostLike::class);
-    }
-    
-    /**
-     *
-     */
-    public function deslikes() {
-        return $this->hasMany(PostDesLike::class);
-    }
+    return $tags;
+  }
 
-    /**
-     *
-     */
-    public function tags() {
-        return $this->hasMany(PostTag::class);
-    }
+  /**
+   *
+   */
+  public function comments() {
+    return $this->hasMany(PostComment::class);
+  }
 
-    /**
-     *
-     */
-    public function teacher() {
-        return $this->belongsTo(Teacher::class);
-    }
-    
+  /**
+   *
+   */
+  public function likes() {
+    return $this->hasMany(PostLike::class);
+  }
+
+  /**
+   *
+   */
+  public function deslikes() {
+    return $this->hasMany(PostDesLike::class);
+  }
+
+  /**
+   *
+   */
+  public function tags() {
+    return $this->hasMany(PostTag::class);
+  }
+
+  /**
+   *
+   */
+  public function teacher() {
+    return $this->belongsTo(Teacher::class);
+  }
+
 }

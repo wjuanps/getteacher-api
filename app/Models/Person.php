@@ -3,56 +3,60 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use YourAppRocks\EloquentUuid\Traits\HasUuid;
 
 /**
- * 
+ *
  * @author Juan Soares
  */
 class Person extends Model {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'cpf', 'date_of_birth', 'photo', 'identifier', 'gender'
-    ];
 
-    /**
-     * 
-     * @var \App\Models\Person $address
-     */
-    private $person;
+  use HasUuid;
 
-    /**
-     * Create a new model instance.
-     *
-     * @* @param Person $person
-     * 
-     * @return void
-     */
-    // public function __construct(Person $person) {
-    //     $this->person = $person;
-    // }
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'name', 'cpf', 'date_of_birth', 'photo', 'identifier', 'gender'
+  ];
 
-    /**
-     *
-     */
-    public function teacher() {
-        return $this->hasOne(Teacher::class);
-    }
+  /**
+   *
+   * @var \App\Models\Person $address
+   */
+  private $person;
 
-    /**
-     *
-     */
-    public function student() {
-        return $this->hasOne(Student::class);
-    }
+  /**
+   * Create a new model instance.
+   *
+   * @* @param Person $person
+   *
+   * @return void
+   */
+  // public function __construct(Person $person) {
+  //     $this->person = $person;
+  // }
 
-    /**
-     *
-     */
-    public function address() {
-        return $this->belongsTo(Address::class);
-    }
+  /**
+   *
+   */
+  public function teacher() {
+    return $this->hasOne(Teacher::class);
+  }
+
+  /**
+   *
+   */
+  public function student() {
+    return $this->hasOne(Student::class);
+  }
+
+  /**
+   *
+   */
+  public function address() {
+    return $this->belongsTo(Address::class);
+  }
 }
