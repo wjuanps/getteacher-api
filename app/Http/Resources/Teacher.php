@@ -2,6 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Post as PostResource;
+use App\Http\Resources\Person as PersonResource;
+use App\Http\Resources\TeacherDegree as TeacherDegreeResource;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Teacher extends JsonResource {
@@ -13,14 +17,13 @@ class Teacher extends JsonResource {
    */
   public function toArray($request) {
     return array(
-      "uuid" => $this->getUuid(),
+      "id" => $this->getUuid(),
       "about" => $this->about,
       "hour_of_class" => $this->hour_of_class,
       "kind_of_class" => $this->kind_of_class,
-      "person" => [
-        "uuid" => $this->person->getUuid(),
-        "name" => $this->person->name
-      ]
+      "person" => new PersonResource($this->person),
+      "degrees" => TeacherDegreeResource::collection($this->degrees),
+      "posts" => PostResource::collection($this->posts)
     );
   }
 }

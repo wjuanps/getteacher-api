@@ -59,4 +59,8 @@ class Person extends Model {
   public function address() {
     return $this->belongsTo(Address::class);
   }
+
+  public function phone() {
+    return $this->hasMany(Phone::class);
+  }
 }

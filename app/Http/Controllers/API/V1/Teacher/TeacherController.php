@@ -39,7 +39,8 @@ class TeacherController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function show($id) {
-
+    $teacher = Teacher::findByUuid($id);
+    return new TeacherResource($teacher);
   }
 
   /**

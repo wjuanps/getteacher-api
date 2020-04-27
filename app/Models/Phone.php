@@ -28,14 +28,14 @@ class Phone extends Model {
    */
   private $phone;
 
-  /**
-   * Create a new model instance.
-   *
-   * @* @param Phone $phone
-   *
-   * @return void
-   */
-  public function __construct(Phone $phone) {
-    $this->phone = $phone;
-  }
+  // /**
+  //  * Create a new model instance.
+  //  *
+  //  * @* @param Phone $phone
+  //  *
+  //  * @return void
+  //  */
+  // public function __construct(Phone $phone) {
+  //   $this->phone = $phone;
+  // }
 }
