@@ -95,7 +95,7 @@ class Post extends Model {
    *
    */
   public function deslikes() {
-    return $this->hasMany(PostDesLike::class);
+    return $this->hasMany(PostDeslike::class);
   }
 
   /**
@@ -111,5 +111,4 @@ class Post extends Model {
   public function teacher() {
     return $this->belongsTo(Teacher::class);
   }
-
 }
