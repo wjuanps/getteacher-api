@@ -24,5 +24,6 @@ Route::get('routes', function () {
 
 Route::group(['prefix' => 'v1', 'namespace' => 'API\V1'], function () {
   Route::apiResource('teachers', 'Teacher\TeacherController');
+  Route::apiResource('students', 'Student\StudentController');
   Route::apiResource('teachers.posts', 'Teacher\TeacherPostController')->shallow();
 });
