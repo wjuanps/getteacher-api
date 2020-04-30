@@ -25,5 +25,14 @@ Route::get('routes', function () {
 Route::group(['prefix' => 'v1', 'namespace' => 'API\V1'], function () {
   Route::apiResource('teachers', 'Teacher\TeacherController');
   Route::apiResource('students', 'Student\StudentController');
-  Route::apiResource('teachers.posts', 'Teacher\TeacherPostController')->shallow();
+  Route::apiResource('forums', 'Forum\ForumController');
+  Route::apiResource('posts', 'Post\PostController');
+  Route::apiResource('students.ratings', 'Student\StudentRatingController');
+  Route::apiResource('teachers.posts', 'Teacher\TeacherPostController')
+    ->except(["show"])
+    ->shallow();
+  Route::apiResource('teachers.offered-classes', 'Teacher\TeacherOfferedClassController')
+    ->shallow();
+  Route::apiResource('teachers.degrees', 'Teacher\TeacherDegreesController')
+    ->shallow();
 });
